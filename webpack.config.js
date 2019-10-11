@@ -15,9 +15,22 @@ module.exports = {
         test: /\.html$/,
         use: [
           {
-            loader: 'html-loader'
+            loader: 'html-loader',
+            options: {
+              'presets': [
+                '@babel/preset-env',
+                '@babel/preset-react'
+              ],
+              'plugins': [
+                '@babel/plugin-proposal-class-properties'
+              ]
+            }
           }
         ]
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
@@ -27,11 +40,6 @@ module.exports = {
       filename: 'index.html'
     })
   ],
-  output: {
-    path: __dirname + '/dist',
-    publicPath: '/assets/',
-    filename: 'bundle.js'
-  },
   devServer: {
     contentBase: './dist'
   }
